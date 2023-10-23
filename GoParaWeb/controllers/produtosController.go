@@ -12,3 +12,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	todosOsProdutos := models.BuscaTodosOsProdutos()  /*executa a busca dos produtos*/
 	temp.ExecuteTemplate(w, "Index", todosOsProdutos) /*carrega os produtos na pagina index (carregada na pasta templates)*/
 }
+
+func Novo(w http.ResponseWriter, r *http.Request) {
+	temp.ExecuteTemplate(w, "novo", nil)
+}
