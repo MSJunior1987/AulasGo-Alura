@@ -1,3 +1,5 @@
+/*20/102023*/
+
 1 - 20/10/2023 - Ao tentar executar o codigo no chrome ele redireciona automaticamente para o https://localhost/8000 sendo necessario o uso 
 do modo anonimo do mesmo (chrome).
 
@@ -30,3 +32,11 @@ func index(w http.ResponseWriter, r *http.Request) {
 }
 
 3 - Os item que sao preenchidos pela struct no range do html devem ter a mesma nomencratura to titulo da table
+
+/*23/10/2023*/
+- se criar um arquivo go dentro de outra pasta, sera necessario criar dessa pasta um arquivo go.mod. 
+Para incluir um arquivo go.mod com o comando 'go mod init nome-do-seu-modulo'
+
+-para se trabalhar com mais diretorios sera necessario, no diretorio raiz, criar o arquivo go.work. Esse arquivo declara as rotas de diretorios que serao usados nos arquivos go.mod.
+
+- no arquivo go.mod, fica guardado o endereco do diretorio que sera utilizado no arquivo go.work

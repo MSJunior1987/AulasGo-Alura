@@ -1,0 +1,9 @@
+go 1.21.2
+
+use (
+	./
+	./db
+	./models
+	./routes
+	./controllers
+)
