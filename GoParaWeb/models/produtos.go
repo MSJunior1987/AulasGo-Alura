@@ -31,6 +31,7 @@ func BuscaTodosOsProdutos() []Produto {
 			panic(erro.Error())
 		}
 
+		p.Id = id
 		p.Nome = nome
 		p.Descricao = descricao
 		p.Preco = preco
@@ -54,5 +55,16 @@ func CriarNovoProduto(nome, descricao string, preco float64, quantidade int) {
 
 	/*a variavel e do tipo sql.Stmt*/
 	insereDadosNoBanco.Exec(nome, descricao, preco, quantidade)
+	defer db.Close()
+}
+
+func ExcluiProduto(id string) {
+	db := db.ConectaComBancoDeDados()
+
+	querieExcluirProduto, erro := db.Prepare("delete from produtos where id = ?")
+	if erro != nil {
+		panic(erro.Error())
+	}
+	querieExcluirProduto.Exec(id)
 	defer db.Close()
 }
