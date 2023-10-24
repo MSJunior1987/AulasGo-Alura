@@ -68,3 +68,44 @@ func ExcluiProduto(id string) {
 	querieExcluirProduto.Exec(id)
 	defer db.Close()
 }
+
+func EditarProduto(id string) Produto {
+	db := db.ConectaComBancoDeDados()
+	produtoBanco, erro := db.Query("select * from produtos where id = ?", id)
+	if erro != nil {
+		panic((erro.Error()))
+	}
+
+	produtoParaAtualizar := Produto{}
+
+	for produtoBanco.Next() {
+		var id, quantidade int
+		var nome, descricao string
+		var preco float64
+
+		erro = produtoBanco.Scan(&id, &nome, &descricao, &preco, &quantidade)
+
+		if erro != nil {
+			panic(erro.Error())
+		}
+		produtoParaAtualizar.Id = id
+		produtoParaAtualizar.Nome = nome
+		produtoParaAtualizar.Descricao = descricao
+		produtoParaAtualizar.Quantidade = quantidade
+		produtoParaAtualizar.Preco = preco
+	}
+	defer db.Close()
+	return produtoParaAtualizar
+}
+
+func AtualizarProduto(id int, nome, descricao string, preco float64, quantidade int) {
+	db := db.ConectaComBancoDeDados()
+	atualizaProduto, erro := db.Prepare("update produtos set nome=?, descricao=?, preco=?, quantidade=? where id=?")
+
+	if erro != nil {
+		panic(erro.Error())
+	}
+
+	atualizaProduto.Exec(nome, descricao, preco, quantidade, id)
+	defer db.Close()
+}
