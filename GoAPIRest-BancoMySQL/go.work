@@ -2,8 +2,8 @@ go 1.21.2
 
 use (
 	./
-	./database
+	./controllers
+	./data
 	./models
 	./routes
-	./controllers
 )
