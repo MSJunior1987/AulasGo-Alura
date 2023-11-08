@@ -6,4 +6,5 @@ use (
 	./data
 	./models
 	./routes
+	./middleware
 )
