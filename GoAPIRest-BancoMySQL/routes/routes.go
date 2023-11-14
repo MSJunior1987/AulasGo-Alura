@@ -19,5 +19,10 @@ func HandleRequest() {
 	r.HandleFunc("/api/personalidades", controllers.CriaUmaNovaPersonalidade).Methods("Post")
 	r.HandleFunc("/api/personalidades/{id}", controllers.DeletaUmaPersonalidade).Methods("Delete")
 	r.HandleFunc("/api/personalidades/{id}", controllers.EditaPersonalidade).Methods("Put")
-	log.Fatal(http.ListenAndServe(":8000", handlers.CORS(handlers.AllowedOrigins([]string{"*"}))(r)))
+	log.Fatal(http.ListenAndServe(":8000", handlers.CORS(
+		handlers.AllowedOrigins([]string{"http://localhost"}),
+		handlers.AllowedMethods([]string{"GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS"}),
+		handlers.AllowedHeaders([]string{"Content-Type"}),
+	)(r)))
+
 }
