@@ -1,18 +1,14 @@
 package main
 
-import "github.com/gin-gonic/gin"
-
-func ExibeTodosAlunos(c *gin.Context) {
-	c.JSON(200, gin.H{
-		"id":   "1",
-		"nome": "Marcio Junior",
-	})
-}
+import (
+	"api-go-gin/models"
+	"api-go-gin/routes"
+)
 
 func main() {
-	r := gin.Default() //cria um servidor com as configuracoes padrao
-	r.GET("/alunos", ExibeTodosAlunos)
-
-	r.Run() //inicializa o servidor
-	//r.Run("5000") //inicializa o servidor na porta 5000
+	models.Alunos = []models.Aluno{
+		{Nome: "Gui Lims", CPF: "34770928807", RG: "404036107"},
+		{Nome: "Ana", CPF: "12345678912", RG: "121231233"},
+	}
+	routes.HandleRequests()
 }
